@@ -12,6 +12,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const { updateUser } = useContext(UserContext);
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
@@ -20,6 +21,7 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (!validateEmail(email)) {
       setError('Please enter a valid email address.');
       return;
@@ -44,6 +46,8 @@ const Login = () => {
       }
     } catch (error) {
       setError(error.response?.data?.message || 'Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -78,7 +82,7 @@ const Login = () => {
             </Link>
           </p>
           <button type="submit" className="btn-primary">
-            LOGIN
+            {loading ? "LOGGING IN" : "LOGIN"}
           </button>
           <p className="text-[13px] mt-3">
             Don't have an account?{' '}

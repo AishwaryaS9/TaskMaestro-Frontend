@@ -17,6 +17,7 @@ const SignUp = () => {
     const [password, setPassword] = useState("");
     const [adminInviteToken, setAdminInviteToken] = useState("");
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const { updateUser } = useContext(UserContext);
     const { darkMode, toggleDarkMode } = useContext(ThemeContext);
@@ -25,7 +26,7 @@ const SignUp = () => {
 
     const handleSignUp = async (e) => {
         e.preventDefault();
-
+        setLoading(true);
         let profileImageUrl = '';
 
         if (!fullName) {
@@ -42,7 +43,7 @@ const SignUp = () => {
             setError("Please enter the password");
             return;
         }
-        
+
         setError("");
 
         try {
@@ -69,6 +70,8 @@ const SignUp = () => {
             } else {
                 setError("Something went wrong. Please try again.");
             }
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -117,7 +120,7 @@ const SignUp = () => {
                         </p>
                     )}
                     <button type="submit" className="btn-primary">
-                        SIGN UP
+                        {loading ? "SIGNING UP" : "SIGN UP"}
                     </button>
                     <p className="text-[13px] text-slate-800 mt-3 dark:text-gray-400">
                         Already an account?{" "}
