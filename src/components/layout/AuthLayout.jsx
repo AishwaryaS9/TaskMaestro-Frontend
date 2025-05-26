@@ -9,7 +9,7 @@ const AuthLayout = ({ children, darkMode, toggleDarkMode }) => {
     return (
         <div className={`flex ${darkMode ? 'dark' : ''} min-h-screen relative`}>
             <div className={`relative w-full md:w-[60vw] min-h-screen flex flex-col justify-start px-8 pt-6 pb-8 transition-all duration-300 ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
-                <h2 className="text-lg font-medium cursor-pointer" onClick={() => navigate('/')}>
+                <h2 className="text-lg font-semibold cursor-pointer" onClick={() => navigate('/')}>
                     Task Maestro
                 </h2>
                 {children}
