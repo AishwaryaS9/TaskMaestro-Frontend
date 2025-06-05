@@ -4,7 +4,7 @@ import { API_PATHS } from '../../utils/apiPaths';
 import { LuUsers } from 'react-icons/lu';
 import Modal from '../Modal';
 import AvatarGroup from '../AvatarGroup';
-import userImg from '../../assets/images/userimg.png';
+import defaultAvatar from '../../assets/images/userimg.png';
 
 const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
     const [allUsers, setAllUsers] = useState([]);
@@ -80,9 +80,12 @@ const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
                             className="flex items-center gap-4 p-3 border-b border-gray-200 dark:border-gray-600"
                         >
                             <img
-                                src={user.profileImageUrl || userImg}
+                                src={user.profileImageUrl || defaultAvatar}
                                 alt={user.name}
                                 className="w-10 h-10 rounded-full"
+                                onError={(e) => {
+                                    e.target.src = defaultAvatar;
+                                }}
                             />
                             <div className="flex-1">
                                 <p className="font-medium text-gray-800 dark:text-white">

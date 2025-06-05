@@ -1,15 +1,19 @@
-import React from 'react'
+import { useState } from 'react'
 import StatCard from './StatCard'
-import userImg from '../../assets/images/userimg.png';
+import defaultImage from '../../assets/images/userimg.png';
 
 const UserCard = ({ userInfo }) => {
+    const [profileImage, setProfileImage] = useState(userInfo?.profileImageUrl || defaultImage);
+
     return (
         <div className='user-card p-2'>
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                    <img src={userInfo?.profileImageUrl || userImg}
+                    <img
+                        src={profileImage}
                         alt={`Avatar`}
                         className='w-12 h-12 rounded-full border-2 border-white'
+                        onError={() => setProfileImage(defaultImage)}
                     />
                     <div>
                         <p className="text-sm font-medium dark:text-gray-100">{userInfo?.name}</p>

@@ -42,6 +42,11 @@ const Profile = () => {
                                 src={user.profileImageUrl || userImg}
                                 alt={`${user.name}'s profile`}
                                 className="w-32 h-32 rounded-full object-cover"
+                                onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = userImg;
+                                }}
+
                             />
                             <div>
                                 <h3 className="text-[18px] font-medium dark:text-gray-400">{user.name}</h3>

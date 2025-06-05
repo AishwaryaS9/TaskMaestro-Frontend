@@ -7,13 +7,10 @@ const ContactUs = ({ darkMode }) => {
         name: '',
         email: '',
         company: '',
-        licenseType: '',
         message: '',
     });
 
     const [errors, setErrors] = useState({});
-
-    const licenseOptions = ['Personal', 'Business', 'Enterprise'];
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -25,7 +22,6 @@ const ContactUs = ({ darkMode }) => {
         if (!formData.name.trim()) newErrors.name = 'Name is required.';
         if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Enter a valid email.';
         if (!formData.company.trim()) newErrors.company = 'Company name is required.';
-        if (!formData.licenseType) newErrors.licenseType = 'Please select a license type.';
         if (!formData.message.trim()) newErrors.message = 'Message cannot be empty.';
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -34,7 +30,7 @@ const ContactUs = ({ darkMode }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validateForm()) {
-            setFormData({ name: '', email: '', company: '', licenseType: '', message: '' });
+            setFormData({ name: '', email: '', company: '', message: '' });
             setErrors({});
         }
     };
@@ -138,26 +134,6 @@ const ContactUs = ({ darkMode }) => {
                                     aria-invalid={errors.company ? 'true' : 'false'}
                                 />
                                 {errors.company && <p className="mt-1 text-red-500 text-sm">{errors.company}</p>}
-                            </div>
-                            <div className="mb-4">
-                                <select
-                                    name="licenseType"
-                                    value={formData.licenseType}
-                                    onChange={handleInputChange}
-                                    className={`w-full h-12 px-4 rounded-md ${darkMode
-                                        ? 'bg-gray-800 text-gray-200 border-gray-600 placeholder-gray-400 focus:ring-gray-400'
-                                        : 'bg-white text-gray-800 border-gray-300 placeholder-gray-400 focus:ring-primary'
-                                        } border focus:outline-none`}
-                                    aria-invalid={errors.licenseType ? 'true' : 'false'}
-                                >
-                                    <option value="">Select License Type</option>
-                                    {licenseOptions.map((option) => (
-                                        <option key={option} value={option}>
-                                            {option}
-                                        </option>
-                                    ))}
-                                </select>
-                                {errors.licenseType && <p className="mt-1 text-red-500 text-sm">{errors.licenseType}</p>}
                             </div>
                             <div className="mb-6">
                                 <textarea

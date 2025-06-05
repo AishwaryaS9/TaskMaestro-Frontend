@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from './../../context/userContext';
 import { useNavigate } from 'react-router-dom';
 import { SIDE_MENU_DATA, SIDE_MENU_USER_DATA } from './../../utils/data';
-import userImg from '../../assets/images/userimg.png';
+import defaultAvatar from '../../assets/images/userimg.png';
 import toast from 'react-hot-toast';
 
 const SideMenu = ({ activeMenu }) => {
   const { user, clearUser } = useContext(UserContext);
   const [sideMenuData, setSideMenuData] = useState([]);
+  const [profileImage, setProfileImage] = useState(defaultAvatar);
 
   const navigate = useNavigate();
 
@@ -29,6 +30,7 @@ const SideMenu = ({ activeMenu }) => {
   useEffect(() => {
     if (user) {
       setSideMenuData(user?.role === "admin" ? SIDE_MENU_DATA : SIDE_MENU_USER_DATA);
+      setProfileImage(user?.profileImageUrl || defaultAvatar);
     }
     return () => { };
   }, [user]);
@@ -39,9 +41,10 @@ const SideMenu = ({ activeMenu }) => {
       <div className="flex flex-col items-center justify-center mb-7 pt-5">
         <div className="relative">
           <img
-            src={user?.profileImageUrl || userImg}
+            src={profileImage || defaultAvatar}
             alt='Profile Image'
             className="w-20 h-20 bg-slate-400 rounded-full"
+            onError={() => setProfileImage(defaultAvatar)}
           />
         </div>
         {user?.role === "admin" && (

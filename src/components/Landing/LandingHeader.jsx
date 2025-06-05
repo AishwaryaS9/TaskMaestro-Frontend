@@ -18,7 +18,7 @@ const LandingHeader = () => {
             <div className="container flex flex-wrap items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
                 <div className="relative flex flex-row items-center justify-between w-full md:w-auto">
                     <a href="#"
-                        className="text-xl font-bold leading-none select-none">
+                        className="text-lg font-semibold leading-none select-none">
                         Task Maestro
                     </a>
                     <button
